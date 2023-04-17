@@ -1,7 +1,7 @@
 class Node:
-    def __init__(self, value=None):
+    def __init__(self, value=None, next_node=None):
         self.value = value
-        self.next_node = None
+        self.next_node = next_node
         # self.previousNode = None
 
     def __str__(self):
@@ -54,11 +54,10 @@ class LinkedList:
     def del_head(self):
         if self.head:
             self.head = self.head.next_node
-        # elif self.head.next_node
         else:
             raise Exception("LinkedList is Empty")
 
-    def del_end(self):
+    def del_end(self, rtrn=False):
         node = self.head
         if node is None or node.next_node is None:
             self.head = None
@@ -69,25 +68,22 @@ class LinkedList:
             node = node.next_node
         old_node.next_node = None
 
+    def reverse(self):
+        new_head = None
+        head = self.head
+        while head:
+            new_head = Node(head.value, new_head)
+            head = head.next_node
+        self.head = new_head
+
 
 a = LinkedList()
 a.add_to_end(12)
 a.add_to_end(24)
 a.add_to_end(36)
 print(a.print_linked_list())
-a.add_to_node(26, 24)
+a.reverse()
 print(a.print_linked_list())
-a.del_end()
-print(a.print_linked_list())
-a.del_end()
-print(a.print_linked_list())
-a.del_end()
-print(a.print_linked_list())
-a.del_end()
-print(a.print_linked_list())
-a.del_end()
-print(a.print_linked_list())
-# print(a.print_linked_list())
 # a.del_head()
 # print(a.print_linked_list())
 # a.del_head()
